@@ -16,22 +16,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from .views import HomeView
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
-from django.views.generic import RedirectView
 
 prefix = "api/v1/"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', RedirectView.as_view(url=prefix+'docs/redoc/', permanent=True)),
-    path(prefix+"inventory/", include('inventory_api.urls')),
-    path(prefix+"auth/", include('accounts_api.urls')),
+    path('', HomeView.as_view(), name='home'),
+    path(prefix+'inventory/', include('inventory_api.urls')),
+    path(prefix+'auth/', include('accounts_api.urls')),
     path(prefix+'schema/', SpectacularAPIView.as_view(), name='schema'),
-    path(prefix+'docs/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path(prefix+'docs/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger'),
     path(prefix+'docs/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]
-

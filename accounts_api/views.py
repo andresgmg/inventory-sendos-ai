@@ -2,27 +2,27 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
-from .serializers import UserSerializer, RegisterSerializer
+from .serializers import UserResponseSerializer, RegisterRequestSerializer
 from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 
 @extend_schema_view(
     tags=["Auth"],
-    post=extend_schema(tags=["Auth"], request=RegisterSerializer, responses={201: UserSerializer}),
+    post=extend_schema(tags=["Auth"], request=RegisterRequestSerializer, responses={201: UserResponseSerializer}),
 )
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
-    serializer_class = RegisterSerializer
+    serializer_class = RegisterRequestSerializer
     permission_classes = [permissions.AllowAny]
 
 @extend_schema_view(
     tags=["Auth"],
-    get=extend_schema(tags=["Auth"], responses={200: UserSerializer}),
+    get=extend_schema(tags=["Auth"], responses={200: UserResponseSerializer}),
 )
 class UserView(generics.RetrieveAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserResponseSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self):
