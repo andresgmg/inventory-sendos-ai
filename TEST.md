@@ -14,7 +14,7 @@
 
 Ejecuta las pruebas con el siguiente comando:
 
-```bash
+```
 python manage.py test accounts_api
 ```
 
@@ -37,7 +37,7 @@ Esto ejecutará las pruebas en el archivo tests.py de la aplicación accounts_ap
 
 Ejecuta las pruebas con el siguiente comando:
 
-```bash
+```
 python manage.py test inventory_api
 ```
 

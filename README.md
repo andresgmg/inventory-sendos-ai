@@ -10,7 +10,7 @@ Desarrollar una API RESTful utilizando Django que gestione una simple aplicació
 
 ## Requerimientos
 
-1. **Modelo de Datos:**
+1. **Modelo de Datos de la tabla "inventory_api_item":**
 
     - `id`: Identificador único del artículo.
     - `name`: Nombre del artículo.
@@ -93,40 +93,40 @@ Entrega límite: 22 de junio.
 
 2. **Instalación:**
     - Clonar el repositorio de GitHub con el comando:
-      ```bash
+      ```
       git clone https://github.com/andresgmg/inventory-sendos-ai.git
       ```
     - Entrar a la carpeta del proyecto:
-      ```bash
+      ```
       cd inventory-sendos-ai
       ```
     - Crear el entorno virtual con el comando:
-      ```bash
+      ```
       python -m venv env
       ```
     - Activar el entorno virtual con el comando:
       - En Windows:
-        ```bash
+        ```
         .\env\Scripts\activate
         ```
       - En macOS/Linux:
-        ```bash
+        ```
         source env/bin/activate
         ```
     - Instalar los requerimientos con el comando:
-      ```bash
+      ```
       pip install -r requirements.txt
       ```
     - Hacer las migraciones con el comando:
-      ```bash
+      ```
       python manage.py makemigrations
       ```
     - Migrar con el comando:
-      ```bash
+      ```
       python manage.py migrate
       ```
     - Iniciar el servidor de forma local con el comando:
-      ```bash
+      ```
       python manage.py runserver
       ```
 
