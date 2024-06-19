@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import HomeView
+from .views import HomeView, TestView
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
@@ -28,6 +28,7 @@ prefix = "api/v1/"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name='home'),
+    path('test/', TestView.as_view(), name='docs-test'),
     path(prefix+'inventory/', include('inventory_api.urls')),
     path(prefix+'auth/', include('accounts_api.urls')),
     path(prefix+'schema/', SpectacularAPIView.as_view(), name='schema'),

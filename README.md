@@ -1,4 +1,6 @@
-# Prueba Técnica: Desarrollo de una API con Django
+# Prueba postulacion [Sendos.ai](https://sendos.ai/)
+
+## Prueba Técnica: Desarrollo de una API con Django
 
 ## Objetivo
 
@@ -87,6 +89,13 @@ Entrega límite: 22 de junio.
       - iniciar el servidor de forma local con el comando:
 
 *NOTA: Al ser local no se utiliza Docker y la DB por defecto para el entorno local es SQLite3*
+
+## Link del repositorio Github
+
+
+## Link de Test realizados
+
+- [Tests realizados en la API](test/)
 
 ## Links de Uso de la API REST
 

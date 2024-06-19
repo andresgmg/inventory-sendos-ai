@@ -11,4 +11,13 @@ class HomeView(View):
             content = readme_file.read()
         html_content = markdown.markdown(content)
         context = {'content': html_content}
-        return render(request, 'home.html', context)
+        return render(request, 'index.html', context)
+
+class TestView(View):
+    def get(self, request, *args, **kwargs):
+        test_path = os.path.join(settings.BASE_DIR, 'TEST.md')
+        with open(test_path, 'r', encoding='utf-8') as test_file:
+            content = test_file.read()
+        html_content = markdown.markdown(content)
+        context = {'content': html_content}
+        return render(request, 'index.html', context)
