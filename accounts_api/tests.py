@@ -47,6 +47,16 @@ class AccountsApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('token', response.data)
 
+    def test_login_user_invalid_credentials(self):
+        response = self.client.post(self.login_url, {
+            'username': self.username,
+            'password': 'wrongpassword'
+        }, format='json')
+        if response.status_code != status.HTTP_400_BAD_REQUEST:
+            print(response.data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('error', response.data)
+
     def test_get_user_details(self):
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
         response = self.client.get(self.user_url, format='json')
@@ -55,6 +65,12 @@ class AccountsApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['username'], self.username)
 
+    def test_unauthorized_user_details(self):
+        response = self.client.get(self.user_url, format='json')
+        if response.status_code != status.HTTP_401_UNAUTHORIZED:
+            print(response.data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
     def test_logout_user(self):
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
         response = self.client.post(self.logout_url, format='json')
@@ -62,8 +78,8 @@ class AccountsApiTests(APITestCase):
             print(response.data)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_unauthorized_user_details(self):
-        response = self.client.get(self.user_url, format='json')
+    def test_logout_user_unauthenticated(self):
+        response = self.client.post(self.logout_url, format='json')
         if response.status_code != status.HTTP_401_UNAUTHORIZED:
             print(response.data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
