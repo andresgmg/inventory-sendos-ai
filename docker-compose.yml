@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: sendosai_db
+      POSTGRES_USER: sendosai_user
+      POSTGRES_PASSWORD: sendosai_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - sendosai_network
+
+  web:
+    build: .
+    command: bash -c "python manage.py migrate && gunicorn --workers=3 --bind=0.0.0.0:8000 inventory_sendosai.wsgi:application"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://sendosai_user:sendosai_pass@db:5432/sendosai_db
+      SECRET_KEY: 'django-insecure-25*f!nkvy0n_9&dn8i#mgi((#ruj5=auef_3iq39&4ik&4cqzx'
+      DEBUG: 'True'
+    networks:
+      - sendosai_network
+
+networks:
+  sendosai_network:
+
+volumes:
+  postgres_data:
