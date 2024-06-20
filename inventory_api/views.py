@@ -40,7 +40,7 @@ class ItemListCreate(generics.ListCreateAPIView):
         responses={200: ItemResponseSerializer},
     ),
     delete=extend_schema(
-        tags=["Inventory"], responses={204: "Success", 400: "Bad Request"}
+        tags=["Inventory"], responses={200: "Success", 400: "Bad Request"}
     ),
 )
 class ItemDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -50,12 +50,13 @@ class ItemDetail(generics.RetrieveUpdateDestroyAPIView):
     def get_serializer_class(self):
         return ItemResponseSerializer
 
-    def perform_destroy(self, instance):
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
         instance.is_deleted = True
         instance.save()
         return Response(
             {
-                "response": "Artículo eliminado con éxito!",
+                "response": "Item successfully deleted!",
                 "item": ItemResponseSerializer(instance).data,
             },
             status=status.HTTP_200_OK,
