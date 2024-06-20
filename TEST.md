@@ -1,4 +1,4 @@
-![img](static/sendos.webp)
+![img](/static/sendos.png)
 
 ---
 
