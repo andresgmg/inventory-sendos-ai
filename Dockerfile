@@ -1,20 +1,20 @@
-# Usar una imagen base oficial de Python
-FROM python:3.9-slim
+# Usa una imagen base oficial de Python
+FROM python:3.12
 
-# Establecer el directorio de trabajo en el contenedor
+# Establece el directorio de trabajo
 WORKDIR /app
 
-# Copiar los archivos de requerimientos
-COPY requirements.txt /app/
+# Copia el archivo requirements.txt a la imagen
+COPY requirements.txt .
 
-# Instalar las dependencias
-RUN pip install --no-cache-dir -r requirements.txt
+# Actualiza pip y luego instala las dependencias
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
-# Copiar el resto de la aplicación al contenedor
-COPY . /app/
+# Copia el código de la aplicación a la imagen
+COPY . .
 
-# Exponer el puerto que Django usa (por defecto es 8000)
+# Expone el puerto en el que Django se ejecuta
 EXPOSE 8000
 
 # Comando para ejecutar la aplicación
-CMD ["gunicorn", "--workers=3", "--bind=0.0.0.0:8000", "inventory_sendosai.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "inventory_sendosai.wsgi:application"]
