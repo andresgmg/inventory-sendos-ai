@@ -5,10 +5,6 @@
 1. **test_register_user**: Verifica que un nuevo usuario puede registrarse correctamente.
 2. **test_login_user**: Verifica que un usuario registrado puede iniciar sesión y recibir un token.
 3. **test_login_user_invalid_credentials**: Verifica que iniciar sesión con credenciales incorrectas devuelve un error.
-4. **test_get_user_details**: Verifica que un usuario autenticado puede obtener sus detalles de usuario.
-5. **test_unauthorized_user_details**: Verifica que obtener detalles de usuario sin autenticación devuelve un error.
-6. **test_logout_user**: Verifica que un usuario autenticado puede cerrar sesión (eliminar su token).
-7. **test_logout_user_unauthenticated**: Verifica que cerrar sesión sin autenticación devuelve un error.
 
 ## Ejecución de las pruebas
 
