@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions, status
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
@@ -32,10 +32,9 @@ class RegisterView(BaseView):
                 email=serializer.validated_data["email"],
                 password=serializer.validated_data["password"],
             )
-            token = Token.objects.create(user=user)
             user_serializer = UserSerializer(instance=user)
             return Response(
-                {"token": "You have to Login", "user": user_serializer.data},
+                {"token": "You have to Login first!", "user": user_serializer.data},
                 status=status.HTTP_201_CREATED,
             )
         else:

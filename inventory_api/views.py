@@ -1,39 +1,62 @@
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from drf_spectacular.utils import extend_schema, extend_schema_view
 from .models import Item
 from .serializers import ItemRequestSerializer, ItemResponseSerializer
+from rest_framework.response import Response
+
 
 @extend_schema_view(
-    tags=["Inventory"],
-    get=extend_schema(tags=["Inventory"],responses=ItemResponseSerializer),
-    post=extend_schema(tags=["Inventory"],request=ItemRequestSerializer, responses=ItemResponseSerializer)
+    get=extend_schema(
+        tags=["Inventory"], responses={200: ItemResponseSerializer(many=True)}
+    ),
+    post=extend_schema(
+        tags=["Inventory"],
+        request=ItemRequestSerializer,
+        responses={201: ItemResponseSerializer},
+    ),
 )
 class ItemListCreate(generics.ListCreateAPIView):
     queryset = Item.objects.filter(is_deleted=False)
     permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
-        if self.request.method == 'POST':
-            return ItemRequestSerializer
         return ItemResponseSerializer
 
+    def perform_create(self, serializer):
+        serializer.save()
+
+
 @extend_schema_view(
-    tags=["Inventory"],
-    get=extend_schema(tags=["Inventory"],responses=ItemResponseSerializer),
-    put=extend_schema(tags=["Inventory"],request=ItemRequestSerializer, responses=ItemResponseSerializer),
-    patch=extend_schema(tags=["Inventory"],request=ItemRequestSerializer, responses=ItemResponseSerializer),
-    delete=extend_schema(tags=["Inventory"],responses=None)
+    get=extend_schema(tags=["Inventory"], responses={200: ItemResponseSerializer}),
+    put=extend_schema(
+        tags=["Inventory"],
+        request=ItemRequestSerializer,
+        responses={200: ItemResponseSerializer},
+    ),
+    patch=extend_schema(
+        tags=["Inventory"],
+        request=ItemRequestSerializer,
+        responses={200: ItemResponseSerializer},
+    ),
+    delete=extend_schema(
+        tags=["Inventory"], responses={204: "Success", 400: "Bad Request"}
+    ),
 )
 class ItemDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Item.objects.filter(is_deleted=False)
     permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
-        if self.request.method in ['PUT', 'PATCH']:
-            return ItemRequestSerializer
         return ItemResponseSerializer
 
     def perform_destroy(self, instance):
         instance.is_deleted = True
         instance.save()
+        return Response(
+            {
+                "response": "Artículo eliminado con éxito!",
+                "item": ItemResponseSerializer(instance).data,
+            },
+            status=status.HTTP_200_OK,
+        )
