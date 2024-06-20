@@ -8,11 +8,9 @@ from .serializers import (
     RegisterRequestSerializer,
     LoginRequestSerializer,
     SuccessResponseSerializer,
-    LogoutResponseSerializer,
 )
-from drf_spectacular.utils import extend_schema, extend_schema_view
-from rest_framework.views import APIView
-from django.contrib.auth import authenticate
+from drf_spectacular.utils import extend_schema
+
 
 # Base de todas las views para homologar los mensajes de errores
 from utils.views import BaseView
@@ -37,39 +35,11 @@ class RegisterView(BaseView):
             token = Token.objects.create(user=user)
             user_serializer = UserSerializer(instance=user)
             return Response(
-                {"token": "Token {}".format(token.key), "user": user_serializer.data},
+                {"token": "You have to Login", "user": user_serializer.data},
                 status=status.HTTP_201_CREATED,
             )
         else:
             return self.error_response(serializer.errors, status.HTTP_400_BAD_REQUEST)
-
-
-@extend_schema_view(
-    tags=["Auth"],
-    get=extend_schema(tags=["Auth"], responses={200: SuccessResponseSerializer}),
-)
-class UserView(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = SuccessResponseSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_object(self):
-        return self.request.user
-
-
-@extend_schema_view(
-    tags=["Auth"],
-    post=extend_schema(tags=["Auth"], responses={204: LogoutResponseSerializer}),
-)
-class LogoutView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
-
-    def post(self, request):
-        try:
-            request.user.auth_token.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except Exception as e:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(BaseView):

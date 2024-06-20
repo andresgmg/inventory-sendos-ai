@@ -39,7 +39,3 @@ class SuccessResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("token", "user")
-
-
-class LogoutResponseSerializer(serializers.Serializer):
-    message = serializers.CharField(default="Logout Success!")
