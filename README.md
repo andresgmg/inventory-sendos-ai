@@ -1,6 +1,8 @@
-# Prueba Postulación [Sendos.ai](https://sendos.ai/)
+![img](static/sendos.webp)
 
 ---
+
+# Prueba Postulación [Sendos.ai](https://sendos.ai/)
 
 ## Prueba Técnica: Desarrollo de una API con Django
 

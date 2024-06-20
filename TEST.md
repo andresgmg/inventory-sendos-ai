@@ -1,3 +1,7 @@
+![img](static/sendos.webp)
+
+---
+
 # Account APP
 
 ## Descripción de las pruebas
