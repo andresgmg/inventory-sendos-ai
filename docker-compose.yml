@@ -18,8 +18,8 @@ services:
       - postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: inventory_sendosai
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_USER: sendosai
+      POSTGRES_PASSWORD: 123456
     ports:
       - "5432:5432"
 
