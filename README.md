@@ -92,6 +92,7 @@ Entrega límite: 22 de junio.
 1. **Requerimientos:**
     - Python
     - GIT
+    - Docker
 
 2. **Instalación:**
     - Clonar el repositorio de GitHub con el comando:
@@ -131,8 +132,6 @@ Entrega límite: 22 de junio.
       ```
       python manage.py runserver
       ```
-
-*NOTA: Al ser local, no se utiliza Docker y la base de datos por defecto para el entorno local es SQLite3.*
 
 ## Link del repositorio GitHub
 

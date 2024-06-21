@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: inventory-sendosai
+    env: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: SECRET_KEY
+        value: YOUR_SECRET_KEY
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "YOUR_RENDER_HOSTNAME"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: inventory-sendosai-db
+          property: connectionString
+
+databases:
+  - name: inventory-sendosai-db
+    plan: free
+    region: oregon
