@@ -14,7 +14,7 @@ services:
 
   web:
     build: .
-    command: ["gunicorn", "--bind", "0.0.0.0:8000", "project_name.wsgi:application"]
+    command: ["gunicorn", "--bind", "0.0.0.0:8000", "inventory_sendosai.wsgi:application"]
     volumes:
       - .:/app
     ports:

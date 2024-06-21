@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 8000
 
 # Comando para ejecutar la aplicación cuando el contenedor se inicie
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "project_name.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "inventory_sendosai.wsgi:application"]
