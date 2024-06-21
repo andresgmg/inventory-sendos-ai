@@ -93,6 +93,7 @@ Entrega límite: 22 de junio.
     - Python
     - GIT
     - Docker
+    - Docker Compose
 
 2. **Instalación:**
     - Clonar el repositorio de GitHub con el comando:
@@ -103,34 +104,33 @@ Entrega límite: 22 de junio.
       ```
       cd inventory-sendos-ai
       ```
-    - Crear el entorno virtual con el comando:
+    - Crear un archivo `.env` en la raíz del proyecto. (pedir el archivo al administrador)
+
+3. **Configuración y ejecución con Docker:**
+    - Construir y levantar los contenedores con Docker Compose:
+      ```sh
+      docker-compose up --build
       ```
-      python -m venv env
+    - En una terminal separada, aplicar las migraciones:
+      ```sh
+      docker-compose exec web python manage.py migrate
       ```
-    - Activar el entorno virtual con el comando:
-      - En Windows:
-        ```
-        .\env\Scripts\activate
-        ```
-      - En macOS/Linux:
-        ```
-        source env/bin/activate
-        ```
-    - Instalar los requerimientos con el comando:
+
+4. **Acceso a la API:**
+    - La API estará disponible en `http://localhost:8000`.
+
+5. **Comandos adicionales:**
+    - Para crear un superusuario de Django:
+      ```sh
+      docker-compose exec web python manage.py createsuperuser
       ```
-      pip install -r requirements.txt
+    - Para detener los contenedores:
+      ```sh
+      docker-compose down
       ```
-    - Hacer las migraciones con el comando:
-      ```
-      python manage.py makemigrations
-      ```
-    - Migrar con el comando:
-      ```
-      python manage.py migrate
-      ```
-    - Iniciar el servidor de forma local con el comando:
-      ```
-      python manage.py runserver
+    - Para acceder al contenedor de la web:
+      ```sh
+      docker-compose exec web sh
       ```
 
 ## Link del repositorio GitHub
