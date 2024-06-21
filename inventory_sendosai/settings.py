@@ -21,14 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv(
-    "SECRET_KEY", "django-insecure-25*f!nkvy0n_9&dn8i#mgi((#ruj5=auef_3iq39&4ik&4cqzx"
-)
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
 # Application definition
 
@@ -101,7 +99,13 @@ WSGI_APPLICATION = "inventory_sendosai.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}
+DATABASES = {
+    "default": dj_database_url.config(
+        default=os.getenv(
+            "DATABASE_URL", "postgres://sendosai:123456@db:5432/inventory_sendosai"
+        )
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -147,12 +151,10 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Allow all host headers
 ALLOWED_HOSTS = ["*"]
 
-# Configuración de seguridad para Render.com
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "True") == "False"
+SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 X_FRAME_OPTIONS = "DENY"

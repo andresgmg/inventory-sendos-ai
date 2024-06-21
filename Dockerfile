@@ -13,9 +13,6 @@ RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 # Copia el código de la aplicación a la imagen
 COPY . .
 
-# Ejecuta collectstatic para recopilar archivos estáticos
-RUN python manage.py collectstatic --noinput
-
 # Expone el puerto en el que Django se ejecuta
 EXPOSE 8000
 
