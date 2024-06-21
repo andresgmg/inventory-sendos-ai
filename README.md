@@ -31,11 +31,9 @@ Desarrollar una API RESTful utilizando Django que gestione una simple aplicació
     - `GET api/v1/inventory/items/{id}/`: Obtener detalles de un artículo específico.
     - `PUT api/v1/inventory/items/{id}/`: Actualizar un artículo específico.
     - `DELETE api/v1/inventory/items/{id}/`: Eliminar un artículo específico. (Borrado logico)
-    - *Endpoints adicionales para el registro, inicio de sesión y cierre de sesión de la aplicación, con los cuales se obtiene el token*:
+    - *Endpoints adicionales para el registro e inicio de sesión con los cuales se obtiene el token*:
         - `POST api/v1/auth/register/`: Registrarse como usuario, retorna un token al ser exitoso.
         - `POST api/v1/auth/login/`: hacer login como usuario, retorna un token al ser exitoso.
-        - `POST api/v1/auth/logout/`: hacer logout como usuario, inhabilita el token generado para el usuario.
-        - `GET api/v1/auth/user/`: Obtener detalles del usuario.
     - *Endpoint adicional para inventario*:
         - `PATCH api/v1/inventory/items/{id}/`: Actualizar un campo de un artículo específico.
 
@@ -47,7 +45,7 @@ Desarrollar una API RESTful utilizando Django que gestione una simple aplicació
 4. **Pruebas Unitarias:**
 
     - Escribir pruebas unitarias para los modelos y los endpoints de la API.
-    - **Respuesta:** Se realizaron 7 pruebas en `accounts_api` y 8 pruebas en `inventory_api`.
+    - **Respuesta:** Se realizaron 3 pruebas en `accounts_api` y 8 pruebas en `inventory_api`.
 
 5. **Despliegue con Docker:**
 
