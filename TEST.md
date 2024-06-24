@@ -15,7 +15,7 @@
 Ejecuta las pruebas con el siguiente comando:
 
 ```
-python manage.py test accounts_api
+docker-compose exec web python manage.py test accounts_api
 ```
 
 Esto ejecutará las pruebas en el archivo tests.py de la aplicación accounts_api y proporcionará un informe de los resultados en la consola.
@@ -38,7 +38,7 @@ Esto ejecutará las pruebas en el archivo tests.py de la aplicación accounts_ap
 Ejecuta las pruebas con el siguiente comando:
 
 ```
-python manage.py test inventory_api
+docker-compose exec web python manage.py test inventory_api
 ```
 
 Esto ejecutará las pruebas en el archivo tests.py de la aplicación inventory_api y proporcionará un informe de los resultados en la consola.

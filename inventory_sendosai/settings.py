@@ -101,7 +101,10 @@ WSGI_APPLICATION = "inventory_sendosai.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}
+DATABASES = {
+    "default": dj_database_url.config(default=os.getenv("DATABASE_URL")),
+    "test": dj_database_url.config(default=os.getenv("DATABASE_TEST_URL")),
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

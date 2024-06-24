@@ -106,28 +106,39 @@ Entrega límite: 22 de junio.
 
 3. **Configuración y ejecución con Docker:**
     - Construir y levantar los contenedores con Docker Compose:
-      ```sh
+      ```
       docker-compose up --build
       ```
     - En una terminal separada, aplicar las migraciones:
-      ```sh
+      ```
       docker-compose exec web python manage.py migrate
       ```
 
 4. **Acceso a la API:**
     - La API estará disponible en `http://localhost:8000`.
 
-5. **Comandos adicionales:**
+5. **Ejecutar pruebas:**
+    - Crear la base de datos de prueba:
+      ```
+      docker-compose exec db psql -U sendosai
+      CREATE DATABASE inventory_sendosai_test;
+      ```
+    - Ejecutar las pruebas:
+      ```
+      docker-compose exec web python manage.py test
+      ```
+
+6. **Comandos adicionales:**
     - Para crear un superusuario de Django:
-      ```sh
+      ```
       docker-compose exec web python manage.py createsuperuser
       ```
     - Para detener los contenedores:
-      ```sh
+      ```
       docker-compose down
       ```
     - Para acceder al contenedor de la web:
-      ```sh
+      ```
       docker-compose exec web sh
       ```
 

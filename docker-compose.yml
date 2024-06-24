@@ -35,6 +35,7 @@ services:
       - db
     environment:
       DATABASE_URL: postgres://sendosai:123456@db:5432/inventory_sendosai
+      DATABASE_TEST_URL: postgres://sendosai:123456@db:5432/inventory_sendosai_test
     networks:
       - django_network
 
