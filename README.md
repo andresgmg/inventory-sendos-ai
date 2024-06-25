@@ -118,12 +118,7 @@ Entrega límite: 22 de junio.
     - La API estará disponible en `http://localhost:8000`.
 
 5. **Ejecutar pruebas:**
-    - Crear la base de datos de prueba:
-      ```
-      docker-compose exec db psql -U sendosai
-      CREATE DATABASE inventory_sendosai_test;
-      ```
-    - Ejecutar las pruebas:
+    - En una terminal separada, ejecutar las pruebas:
       ```
       docker-compose exec web python manage.py test
       ```
